@@ -1,0 +1,10 @@
+{
+  "lastChangelogVersion": "0.70.6",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "medium",
+  "packages": [
+    "https://github.com/davebcn87/pi-autoresearch",
+    "npm:pi-subagents"
+  ]
+}

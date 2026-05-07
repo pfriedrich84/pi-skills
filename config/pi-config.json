@@ -1,0 +1,6 @@
+{
+  "guardrails": {
+    "confirmDangerousCommands": true,
+    "blockPatterns": ["rm -rf", "sudo rm", ":(){ :|:& };:"]
+  }
+}
