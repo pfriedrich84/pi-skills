@@ -3,20 +3,48 @@ node_modules/
 dist/
 build/
 coverage/
-
-# Pi/runtime state that should not be committed
-.pi/
-sessions/
-run-history.jsonl
-auth.json
-*.log
-
-# Local/editor noise
-.DS_Store
-.env
-.env.*
-!.env.example
+.cache/
+.tmp/
+tmp/
 
 # Python cache
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Pi runtime/state that should not be committed
+.pi/
+agent/sessions/
+sessions/
+agent/run-history.jsonl
+run-history.jsonl
+agent/todos/
+todos/
+agent/git/
+git/
+agent/bin/
+bin/
+
+# Secrets and local credentials
+auth.json
+agent/auth.json
+**/auth.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.token
+*token*
+*secret*
+*password*
+
+# Logs and local/editor noise
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
