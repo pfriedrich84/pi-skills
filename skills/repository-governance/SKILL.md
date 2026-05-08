@@ -107,6 +107,7 @@ When the user asks for defaults or implementation, use:
 - update README links, docs indexes, and internal Markdown links that break because of moves;
 - add GitHub issue and pull request templates unless equivalent templates already exist;
 - add a lightweight Markdown local-link checker script when the repository does not already have one;
+- add/update dependency and external documentation guidance, including Context7 usage, when the repository depends on third-party libraries, frameworks, SDKs, APIs, CLIs, generated clients, or config formats;
 - add useful optional docs only when the repository shape supports them, such as ADRs, testing docs, troubleshooting docs, configuration docs, or ecosystem-specific validation examples;
 - implement clearly safe documentation-only improvements that are necessary to complete the agreed structure;
 - collect unrelated or larger improvements in a `Suggested follow-ups` section instead of interrupting the run;
@@ -148,7 +149,7 @@ When the agent learns something likely to matter again, it should suggest storin
 
 Store information in:
 
-- `docs/agent/MEMORY.md` for durable project preferences, recurring context, maintainer preferences, known constraints, and operational notes;
+- `docs/agent/MEMORY.md` for durable project preferences, recurring context, constraints, preferences, known constraints, and operational notes;
 - `docs/agent/DECISIONS.md` for lightweight decisions that affect future implementation;
 - `docs/agent/ANTI_PATTERNS.md` for recurring mistakes, discouraged approaches, and repo-specific things agents should avoid;
 - `docs/agent/CHANGELOG_AGENT.md` for governance-system changes made by agents;
@@ -221,6 +222,40 @@ If no tooling exists, suggest optional improvements such as:
 
 Only run tools that are already available or explicitly approved. Do not force security tooling into lightweight repositories unless clearly useful.
 
+## External documentation and Context7
+
+Agents should not rely only on model memory when implementing, refactoring, debugging, or migrating code that depends on external technology.
+
+When a task involves third-party libraries, frameworks, SDKs, public APIs, CLIs, generated clients, config formats, migration guides, or fast-moving platform behavior:
+
+- use Context7 to retrieve current documentation before making dependency-related code changes;
+- prefer official, version-specific documentation and examples;
+- verify breaking changes, deprecations, config formats, CLI flags, and generated-client behavior against current documentation;
+- summarize the documentation source used when the change is non-trivial;
+- if Context7 does not return useful documentation, say so explicitly in the final summary and fall back to official docs, release notes, repository README files, or source code;
+- do not use stale model memory as the sole basis for dependency-sensitive implementation decisions.
+
+Use Context7 for:
+
+- framework APIs;
+- SDK usage;
+- CLI commands and flags;
+- configuration file formats;
+- generated clients;
+- migration tasks;
+- breaking changes and deprecations;
+- dependency-related debugging.
+
+Do not use Context7 as a replacement for:
+
+- repository-specific architecture decisions;
+- business logic decisions;
+- private/internal APIs not covered by public documentation;
+- tests, validation, or code review;
+- explicit maintainer instructions in `AGENTS.md` or `docs/agent/*`.
+
+When creating or updating `docs/agent/SUPPLY_CHAIN.md`, `docs/agent/CODING.md`, `docs/agent/CHECKS.md`, or `docs/agent/WORKFLOWS.md`, include this Context7 rule when the repository has meaningful external dependencies.
+
 ## Constraints awareness
 
 Agents should actively identify, summarize, and document repository constraints.
@@ -279,6 +314,7 @@ Record entries such as:
 - normalized issue or PR templates;
 - added validation or link-checking workflows;
 - updated supply-chain guidance;
+- updated external documentation and Context7 guidance;
 - resolved governance drift.
 
 Do not duplicate the user-facing project changelog. This file tracks the evolution of repo governance and agent instructions.
@@ -297,7 +333,8 @@ Detect when:
 - CI no longer validates documented workflows;
 - deployment docs no longer match actual deployment files;
 - issue/PR templates no longer reflect current validation expectations;
-- supply-chain guidance conflicts with actual dependency practices.
+- supply-chain guidance conflicts with actual dependency practices;
+- external documentation guidance is missing for dependency-heavy repositories.
 
 When drift is found:
 
@@ -318,6 +355,7 @@ Assess:
 - operational maturity;
 - validation maturity;
 - supply-chain maturity;
+- external documentation readiness;
 - AI-agent readiness;
 - onboarding quality;
 - governance consistency;
@@ -356,6 +394,7 @@ Track missing or weak governance areas such as:
 - stale documentation;
 - inconsistent memory;
 - unsafe dependency practices;
+- missing external documentation workflow for dependencies;
 - missing constraints;
 - missing onboarding guidance;
 - missing anti-pattern guidance;
@@ -382,7 +421,8 @@ Read first, do not edit yet:
 - existing `docs/` tree;
 - package/build files that reveal validation commands;
 - CI workflows and release/deployment configuration;
-- dependency manifests, lockfiles, Dockerfiles, and container compose files.
+- dependency manifests, lockfiles, Dockerfiles, and container compose files;
+- existing dependency, supply-chain, coding, and workflow docs that should mention Context7 or external documentation checks.
 
 Look for ecosystem signals and use them to suggest checks without inventing commands.
 
@@ -394,6 +434,7 @@ After inspection, create a short implementation plan before editing:
 - links/indexes to update;
 - constraints to propose;
 - memory/decision/anti-pattern entries to propose;
+- supply-chain and external documentation guidance to add;
 - governance drift to fix or report;
 - validation commands to run.
 
@@ -403,7 +444,7 @@ Then execute the plan unless the current mode is Review only.
 
 Use these placement rules:
 
-- `docs/agent/`: instructions for coding agents, repo rules, constraints, safety, workflows, checks, supply-chain guidance, memory, decisions, anti-patterns, autoresearch, assessment, project brief.
+- `docs/agent/`: instructions for coding agents, repo rules, constraints, safety, workflows, checks, supply-chain guidance, external documentation guidance, memory, decisions, anti-patterns, autoresearch, assessment, project brief.
 - `docs/developer/`: architecture, APIs, CLI, internal implementation, contributing, testing, ADRs, release engineering.
 - `docs/user/`: installation, configuration, deployment, user workflows, operations, troubleshooting.
 - Root `README.md`: keep as human entry point; link to docs index.
@@ -423,12 +464,12 @@ Minimum content expectations:
 - `docs/agent/RULES.md`: hard project/domain invariants, change discipline, and secret-handling rules.
 - `docs/agent/CONSTRAINTS.md`: hard environmental, technical, operational, business, compatibility, and maintainer constraints that agents must respect.
 - `docs/agent/PROJECT.md`: purpose, architecture, important paths, canonical docs.
-- `docs/agent/CODING.md`: coding conventions, implementation patterns, testing discipline, refactor expectations, and preferred coding workflows.
+- `docs/agent/CODING.md`: coding conventions, implementation patterns, testing discipline, refactor expectations, preferred coding workflows, and Context7 usage for external dependency code.
 - `docs/agent/REVIEW.md`: PR review expectations and review focus areas.
-- `docs/agent/CHECKS.md`: validation commands and when to run them.
-- `docs/agent/WORKFLOWS.md`: standard change workflow, local CI simulation, dependency workflow if relevant.
+- `docs/agent/CHECKS.md`: validation commands, dependency-documentation checks, and when to run them.
+- `docs/agent/WORKFLOWS.md`: standard change workflow, local CI simulation, dependency workflow, and Context7 documentation workflow if relevant.
 - `docs/agent/SAFETY.md`: allowed, ask-first, never, before finishing.
-- `docs/agent/SUPPLY_CHAIN.md`: dependency safety rules, package introduction policy, minimum dependency age, image scanning expectations, and supply-chain risk guidance.
+- `docs/agent/SUPPLY_CHAIN.md`: dependency safety rules, package introduction policy, minimum dependency age, Context7/current-documentation policy, image scanning expectations, and supply-chain risk guidance.
 - `docs/agent/MEMORY.md`: durable repo-local memory for recurring context, constraints, preferences, and operational notes.
 - `docs/agent/DECISIONS.md`: lightweight decision log for future agents.
 - `docs/agent/ANTI_PATTERNS.md`: discouraged approaches and recurring mistakes agents should avoid.
@@ -511,6 +552,7 @@ Summarize:
 - constraints proposed or added;
 - governance drift detected or resolved;
 - supply-chain guidance added or suggested;
+- external documentation and Context7 guidance added or suggested;
 - repository maturity assessment;
 - validation run and results;
 - open questions/TODOs;
@@ -537,7 +579,7 @@ Avoid:
 
 - Tool-neutral: `AGENTS.md` is canonical; tool-specific files are shims.
 - Concise: agent entry points should be scannable.
-- Durable: domain rules, constraints, checks, safety, supply-chain guidance, memory, decisions, anti-patterns, assessment, and governance changelog live in `docs/agent`.
+- Durable: domain rules, constraints, checks, safety, supply-chain guidance, external documentation guidance, memory, decisions, anti-patterns, assessment, and governance changelog live in `docs/agent`.
 - Discoverable: user and developer docs are clearly separated.
 - Safe: do not expose secrets, do not rewrite history, do not commit unless asked.
 - Evidence-based: repository archaeology, memory, decisions, constraints, anti-patterns, and assessment entries must be grounded in observable repository facts.
