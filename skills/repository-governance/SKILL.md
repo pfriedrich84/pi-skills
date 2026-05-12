@@ -21,6 +21,9 @@ High-quality repositories increasingly use:
 - markdown drift detection
 - SBOM generation
 - explicit trust-boundary documentation
+- runtime security guidance
+- release governance
+- architecture fitness functions
 
 ## Valuable docs/agent files
 
@@ -36,6 +39,42 @@ Strong governance repositories often include:
 - `ASSESSMENT.md`
 
 These files help future agents preserve durable context and reduce governance drift.
+
+## Runtime governance guidance
+
+Repositories with operational or production impact should document:
+
+- runtime trust boundaries
+- monitoring expectations
+- security event expectations
+- deployment assumptions
+- runtime secret-handling expectations
+- operational security constraints
+
+## Release governance guidance
+
+Useful release-governance topics include:
+
+- trusted release branches/tags
+- review expectations
+- required CI checks
+- artifact traceability
+- provenance goals
+- deployment approvals
+- rollback awareness
+
+## Architecture fitness functions
+
+Repositories benefit from documenting architectural invariants that should eventually become automatically testable.
+
+Examples:
+
+- transport isolation
+- approval invariants
+- secret logging restrictions
+- least-privilege CI
+- dependency governance
+- governance consistency
 
 ## Repository memory guidance
 
@@ -76,6 +115,9 @@ Indicators of maturity include:
 - governance drift awareness
 - supply-chain documentation
 - durable memory and decision tracking
+- runtime governance
+- release governance
+- architecture fitness guidance
 
 ## Drift prevention
 
