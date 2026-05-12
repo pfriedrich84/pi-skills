@@ -28,6 +28,33 @@ High-quality repositories increasingly use:
 - architecture compliance guidance
 - provenance and signing roadmaps
 - incident-response readiness
+- governance automation
+- governance metrics
+
+## Governance automation guidance
+
+Repositories benefit from identifying governance areas that should become increasingly automated.
+
+Examples:
+
+- markdown drift checks
+- dependency review
+- workflow validation
+- architecture validation
+- runtime scanning
+- invariant checks
+
+## Governance metrics guidance
+
+Useful governance metrics include:
+
+- stale documentation signals
+- dependency governance findings
+- workflow drift
+- architecture violations
+- governance coverage gaps
+
+Governance metrics should focus on operational visibility.
 
 ## Valuable docs/agent files
 
@@ -125,24 +152,6 @@ Operational repositories should eventually document:
 - rollback approaches
 - credential rotation procedures
 
-## Repository memory guidance
-
-Useful durable memory includes:
-
-- architectural preferences
-- operational assumptions
-- preferred implementation patterns
-- intentionally avoided approaches
-- security expectations
-- repository direction
-
-Do not store:
-
-- secrets
-- temporary debugging notes
-- guesses
-- private data
-
 ## Governance maturity progression
 
 Typical maturity progression:
@@ -170,46 +179,5 @@ Indicators of maturity include:
 - policy-as-code direction
 - provenance planning
 - operational incident readiness
-
-## Drift prevention
-
-Common governance drift:
-
-- stale links
-- outdated workflow docs
-- contradictory security guidance
-- undocumented constraints
-- duplicated rules
-- unclear ownership
-
-Useful mitigations:
-
-- markdown link checking
-- modular governance docs
-- CODEOWNERS
-- governance assessments
-- decision logs
-- durable repo memory
-
-## Security-sensitive repository guidance
-
-Repositories handling:
-
-- payments
-- credentials
-- infrastructure
-- CI/CD
-- deployment automation
-- customer payloads
-- banking workflows
-
-should explicitly document:
-
-- trust boundaries
-- workflow invariants
-- approval invariants
-- logging restrictions
-- transport isolation
-- secret-handling rules
-- dependency review expectations
-- AI-agent safety constraints
+- governance automation
+- governance metrics
