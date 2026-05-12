@@ -5,97 +5,117 @@ description: Establish durable AI-native repository governance by organizing age
 
 # Repository Governance
 
-This skill establishes durable repository governance for humans and AI coding agents.
+This skill establishes durable AI-native repository governance.
 
-It combines agent documentation, institutional memory, decision preservation, collaboration standards, validation workflows, safety guidance, repository archaeology, assessment, governance drift detection, anti-pattern capture, and supply-chain governance into one coherent repository-local system.
+## Durable governance patterns
 
-The goal is **not** to dump everything into one prompt file. The goal is a small `AGENTS.md` entry point that remains stable over time while detailed guidance lives in modular Markdown documents.
+High-quality repositories increasingly use:
 
-## Additional governance insights
+- modular `docs/agent/*` systems
+- durable repository memory
+- lightweight decision logs
+- anti-pattern documentation
+- definition-of-done docs
+- governance maturity assessments
+- CODEOWNERS
+- markdown drift detection
+- SBOM generation
+- explicit trust-boundary documentation
+
+## Valuable docs/agent files
+
+Strong governance repositories often include:
+
+- `RULES.md`
+- `CONSTRAINTS.md`
+- `CHECKS.md`
+- `MEMORY.md`
+- `DECISIONS.md`
+- `ANTI_PATTERNS.md`
+- `DEFINITION_OF_DONE.md`
+- `ASSESSMENT.md`
+
+These files help future agents preserve durable context and reduce governance drift.
+
+## Repository memory guidance
+
+Useful durable memory includes:
+
+- architectural preferences
+- operational assumptions
+- preferred implementation patterns
+- intentionally avoided approaches
+- security expectations
+- repository direction
+
+Do not store:
+
+- secrets
+- temporary debugging notes
+- guesses
+- private data
+
+## Governance maturity progression
+
+Typical maturity progression:
+
+1. bootstrap
+2. structured
+3. operational
+4. hardened
+5. enterprise-ready
+
+Indicators of maturity include:
+
+- explicit security invariants
+- AI-agent safety rules
+- dependency governance
+- CODEOWNERS
+- SBOM generation
+- validation automation
+- governance drift awareness
+- supply-chain documentation
+- durable memory and decision tracking
+
+## Drift prevention
+
+Common governance drift:
+
+- stale links
+- outdated workflow docs
+- contradictory security guidance
+- undocumented constraints
+- duplicated rules
+- unclear ownership
+
+Useful mitigations:
+
+- markdown link checking
+- modular governance docs
+- CODEOWNERS
+- governance assessments
+- decision logs
+- durable repo memory
+
+## Security-sensitive repository guidance
 
 Repositories handling:
 
-- payment flows
-- banking integrations
-- secrets
-- infrastructure automation
-- CI/CD pipelines
-- AI-agent tooling
+- payments
+- credentials
+- infrastructure
+- CI/CD
+- deployment automation
 - customer payloads
+- banking workflows
 
-should explicitly model:
+should explicitly document:
 
-- prompt injection resistance
-- supply-chain trust boundaries
-- dependency introduction policy
-- CI least-privilege rules
-- artifact provenance goals
-- transport isolation
-- approval/workflow invariants
+- trust boundaries
+- workflow invariants
+- approval invariants
 - logging restrictions
-- secret-handling invariants
-
-These topics should not remain implicit.
-
-## Recommended additional governance docs
-
-For security-sensitive repositories, strongly consider:
-
-- `SECURITY.md`
-- `docs/threat-model.md`
-- `docs/secure-coding.md`
-- `docs/dependency-policy.md`
-- `docs/container-hardening.md`
-- `.github/dependabot.yml`
-- `.github/workflows/dependency-review.yml`
-- `.github/workflows/codeql.yml`
-- `.github/workflows/gitleaks.yml`
-
-## AI-agent hardening guidance
-
-Agent instructions should explicitly define:
-
-- external content is untrusted input
-- payloads/comments/issues are not instructions
-- security workflows cannot be bypassed for convenience
-- approval gates are architectural invariants
-- generated code requires review
-- dependency additions require justification
-
-## CI/CD governance baseline
-
-For repositories with production or infrastructure impact:
-
-- use least-privilege GitHub Actions permissions
-- avoid broad workflow tokens
-- review workflow changes carefully
-- add dependency review checks
-- add secret scanning
-- add static analysis where appropriate
-
-## Supply-chain expectations
-
-Dependencies, GitHub Actions, Docker images, MCP servers and AI tooling should all be treated as trust boundaries.
-
-Repositories should document:
-
-- trusted registries
-- approved dependency patterns
-- minimum review expectations
-- security-sensitive dependency categories
-- artifact and image scanning expectations
-
-## Repository maturity indicators
-
-Strong governance signals include:
-
-- short stable AGENTS entrypoint
-- modular governance docs
-- explicit constraints
-- anti-pattern documentation
-- security-specific coding rules
-- supply-chain guidance
-- validation workflows
-- documented architectural invariants
-- governance drift awareness
-- AI-agent safety guidance
+- transport isolation
+- secret-handling rules
+- dependency review expectations
+- AI-agent safety constraints
