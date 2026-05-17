@@ -35,6 +35,7 @@ cp config/pi-config.json ~/.pi/config.json
 
 ## Included skills
 
+- `clawpatch`
 - `grill-me`
 - `grill-with-docs`
 - `improve-codebase-architecture`
