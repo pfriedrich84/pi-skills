@@ -1,6 +1,6 @@
 ---
 name: repository-governance
-description: Establish durable AI-native repository governance by organizing agent documentation, preserving institutional memory, normalizing collaboration workflows, documenting decisions, improving safety guidance, assessing repository maturity, detecting governance drift, and strengthening supply-chain practices.
+description: Establish durable AI-native repository governance by actively scanning existing documentation, organizing agent instructions, preserving institutional memory, normalizing collaboration workflows, documenting decisions, improving safety guidance, assessing repository maturity, detecting governance drift, and strengthening supply-chain practices.
 ---
 
 # Repository Governance
@@ -16,6 +16,106 @@ Strong repositories should usually have a root `AGENTS.md` as the primary operat
 `AGENTS.md` should point agents to the repository's durable context before they implement changes. It should define the non-negotiable instructions that must survive across sessions, tools, agents, and contributors.
 
 Use modular `docs/agent/*` files only when the repository grows beyond what one root file can safely cover. Modular files should support the root contract, not replace it.
+
+## Analysis and reasoning posture
+
+Governance work requires deliberate, evidence-based analysis.
+
+When performing a governance audit, use a high-effort, multi-pass review style:
+
+1. scan broadly before proposing changes,
+2. build an inventory of existing documents,
+3. identify the current documentation topology,
+4. compare related documents for overlap, contradiction, drift, and missing links,
+5. infer the intended structure from repository evidence,
+6. propose the smallest safe restructuring path,
+7. separate facts, assumptions, recommendations, and open questions.
+
+Do not expose private chain-of-thought. Instead, provide concise rationale, evidence, file paths, and decision summaries that a human maintainer can review.
+
+When a tool or agent runtime supports configurable reasoning effort, prefer high reasoning effort for governance audits, documentation restructuring, drift detection, and maturity assessments.
+
+## Active repository scan workflow
+
+Before creating or restructuring governance documentation, actively scan the repository.
+
+Build a governance inventory from existing files. Look for:
+
+- root `AGENTS.md`
+- `README.md`
+- `TODO.md` or roadmap files
+- `CONTEXT.md` and `CONTEXT-MAP.md`
+- `docs/adr/`
+- `docs/architecture/`
+- `docs/security/`
+- `docs/integration/`
+- `docs/implementation/`
+- `docs/operations/`
+- `docs/agent/`
+- contribution, release, deployment, validation, or runbook docs
+- `.github/workflows/`
+- dependency manifests and lockfiles
+- Docker, compose, infrastructure, or deployment descriptors
+- configuration examples
+- scripts that define validation, release, or operational behavior
+
+For each relevant document, classify its role:
+
+- canonical operating contract
+- project overview
+- architecture reference
+- decision record
+- implementation plan
+- security guidance
+- integration contract
+- operational runbook
+- validation/checklist
+- roadmap or TODO
+- archive, spike, or historical note
+- duplicate, stale, orphaned, or conflicting document
+
+## Documentation structure audit
+
+After scanning, produce a structure assessment before making large changes.
+
+The assessment should identify:
+
+- the current canonical entrypoints
+- the intended reading order for agents
+- documents that should be linked from `AGENTS.md`
+- documents that duplicate each other
+- documents that contradict accepted decisions or current code
+- documents that look stale or archival
+- missing governance topics
+- missing trust-boundary documentation
+- missing validation or definition-of-done guidance
+- unclear ownership between docs
+- places where docs should be merged, moved, renamed, archived, or cross-linked
+
+Prefer evidence-backed observations over generic templates.
+
+## Safe restructuring guidance
+
+Do not reorganize documents aggressively just to match an ideal template.
+
+Prefer this order:
+
+1. add missing links and reading order,
+2. clarify canonical ownership of topics,
+3. mark stale or archival content clearly,
+4. consolidate duplicated content only when the canonical destination is obvious,
+5. move or rename files only when the user asked for restructuring or the benefit is clear,
+6. preserve existing conventions unless they are actively harmful.
+
+Before moving, deleting, or renaming many documents, propose the target structure and rationale first.
+
+When restructuring, preserve history and reviewer confidence:
+
+- keep changes small and reviewable,
+- avoid mixing large rewrites with file moves,
+- retain redirects or index links when useful,
+- summarize what changed and why,
+- document remaining open questions.
 
 ## Documentation topology guidance
 
@@ -91,6 +191,8 @@ Accepted decisions must not be contradicted silently. If a change conflicts with
 
 Keep decision records short, dated, and decision-focused.
 
+During governance audits, check whether existing docs contradict accepted ADRs or whether ADRs are missing for hard-to-reverse decisions that already appear to be in force.
+
 ## Agent safety guidance
 
 Repositories should document non-negotiable agent constraints, including:
@@ -121,6 +223,8 @@ When such a boundary becomes part of the repository workflow or runtime, documen
 - how it is validated
 - how it can be disabled or replaced
 - what risks or assumptions exist
+
+During the active scan, identify undocumented trust boundaries from manifests, workflows, deployment files, scripts, config examples, and docs.
 
 ## Valuable governance docs
 
@@ -174,6 +278,8 @@ Document:
 
 A useful definition of done should include code, tests, docs, security implications, migration notes, and operational impact where relevant.
 
+During the active scan, derive validation expectations from scripts, package manifests, CI workflows, Makefiles, build files, and existing docs. If the derived expectations are incomplete or contradictory, surface that as a governance gap.
+
 ## Governance metrics guidance
 
 Useful governance metrics include:
@@ -185,6 +291,8 @@ Useful governance metrics include:
 - validation coverage gaps
 - security rule coverage gaps
 - unowned or undocumented trust boundaries
+- orphaned or unlinked docs
+- duplicate or conflicting docs
 
 Governance metrics should focus on operational visibility, not bureaucracy.
 
@@ -290,6 +398,7 @@ Indicators of maturity include:
 - root `AGENTS.md` or equivalent agent operating contract
 - explicit security invariants
 - AI-agent safety rules
+- active documentation inventory and structure audit
 - dependency governance
 - CODEOWNERS
 - SBOM generation
