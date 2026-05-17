@@ -1,5 +1,9 @@
 # CONTEXT.md Format
 
+`CONTEXT.md` captures project-specific language and resolved ambiguities.
+
+Use it when a repository has terms, roles, states, processes, or boundaries that future humans and agents must use consistently. Do not use it for general programming concepts or generic governance vocabulary.
+
 ## Structure
 
 ```md
@@ -42,9 +46,17 @@ _Avoid_: Client, buyer, account
 - **Flag conflicts explicitly.** If a term is used ambiguously, call it out in "Flagged ambiguities" with a clear resolution.
 - **Keep definitions tight.** One sentence max. Define what it IS, not what it does.
 - **Show relationships.** Use bold term names and express cardinality where obvious.
-- **Only include terms specific to this project's context.** General programming concepts (timeouts, error types, utility patterns) don't belong even if the project uses them extensively. Before adding a term, ask: is this a concept unique to this context, or a general programming concept? Only the former belongs.
+- **Only include terms specific to this project's context.** General programming concepts, generic governance words, common DevOps terms, timeouts, error types, utility patterns, and generic architecture terms do not belong just because the project uses them. Before adding a term, ask: is this a concept unique to this context, or a general concept? Only the former belongs.
 - **Group terms under subheadings** when natural clusters emerge. If all terms belong to a single cohesive area, a flat list is fine.
 - **Write an example dialogue.** A conversation between a dev and a domain expert that demonstrates how the terms interact naturally and clarifies boundaries between related concepts.
+
+## Governance relationship
+
+`CONTEXT.md` is not the agent operating contract. Put durable agent rules, reading order, validation expectations, and safety constraints in `AGENTS.md` or another governance document.
+
+Use `CONTEXT.md` to define project-specific words that those governance documents depend on.
+
+For example, if a repository has its own named states, actors, approval concepts, lifecycle terms, or internal product vocabulary, define those here so future agents do not invent alternate terminology.
 
 ## Single vs multi-context repos
 
