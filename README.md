@@ -37,6 +37,7 @@ cp config/pi-config.json ~/.pi/config.json
 
 - `clawpatch`
 - `grill-me`
+- `graphifyy`
 - `grill-with-docs`
 - `improve-codebase-architecture`
 - `tune-repo`
