@@ -1,6 +1,6 @@
 ---
 name: repository-governance
-description: Use when auditing or improving repository governance for AI coding agents: AGENTS.md, documentation topology, ADRs, validation, safety rules, trust boundaries, supply chain, release/runtime governance, and governance drift. Do not use for product-specific architecture design unless the task is about durable governance documentation.
+description: Use when auditing or improving repository governance for AI coding agents: AGENTS.md, documentation topology, ADRs, validation, safety rules, trust boundaries, supply chain, issue/PR scaffolding, release/runtime governance, and governance drift. Do not use for product-specific architecture design unless the task is about durable governance documentation.
 ---
 
 # Repository Governance
@@ -15,6 +15,7 @@ Load these references when the task needs more detail than this skill file shoul
 
 - `references/audit-workflow.md` — detailed repository scan, topology review, drift checks, safe restructuring, and nested agent-instruction guidance.
 - `references/output-templates.md` — audit output, finding, inventory, patch-plan, and evidence templates.
+- `references/governance-scaffolding.md` — issue forms, PR templates, CODEOWNERS, community-health files, labels, and lightweight GitHub governance scaffolding.
 - `references/platform-and-supply-chain-governance.md` — GitHub/platform settings, CI/CD, dependency, trust-boundary, SBOM, provenance, and supply-chain guidance.
 - `references/maturity-model.md` — repeatable maturity criteria from bootstrap to enterprise-ready.
 
@@ -27,6 +28,7 @@ Use this skill when the user asks to:
 - map documentation ownership and reading order,
 - detect governance drift between docs, code, CI, ADRs, workflows, and release/runtime behavior,
 - improve validation, definition-of-done, safety, trust-boundary, supply-chain, release, runtime, or policy-as-code documentation,
+- create or improve lightweight governance scaffolding such as issue forms, PR templates, CODEOWNERS, contribution/support/security docs, or label recommendations,
 - assess repository governance maturity.
 
 Do not use this skill when the user only wants:
@@ -99,7 +101,7 @@ Build a governance inventory from existing files. At minimum, look for:
 - root and nested agent instruction files such as `AGENTS.md` or `AGENTS.override.md`,
 - README, roadmap, TODO, context, contribution, release, deployment, validation, or runbook docs,
 - ADRs, architecture, security, integration, implementation, operations, and agent docs,
-- `.github/workflows/`, CODEOWNERS, dependency manifests, lockfiles, Docker/compose files, infrastructure descriptors, configuration examples, and scripts.
+- `.github/workflows/`, `.github/ISSUE_TEMPLATE/`, PR templates, CODEOWNERS, dependency manifests, lockfiles, Docker/compose files, infrastructure descriptors, configuration examples, and scripts.
 
 For each relevant document, classify its role as canonical, supporting, stale, archival, duplicate, orphaned, conflicting, or unknown.
 
@@ -151,6 +153,16 @@ Compare these sources for contradictions:
 - release docs vs. tags, branches, artifact workflows, changelog, and release notes.
 
 Classify drift as command drift, ownership drift, architecture drift, security drift, release drift, or trust-boundary drift.
+
+## Governance scaffolding
+
+When governance gaps are found, this skill may propose or create lightweight repository scaffolding that improves issue quality, PR review quality, ownership, validation, and agent safety.
+
+Before creating scaffolding, inspect existing `.github/` files and community-health files, preserve the current project style, avoid replacing existing templates unless asked, create the smallest useful set, and separate file-based scaffolding from platform-only settings such as labels, branch protection, rulesets, and required reviews.
+
+Useful scaffolding can include issue forms, PR templates, CODEOWNERS, contribution guidance, security policy, support guidance, label recommendations, and review checklists.
+
+Use `references/governance-scaffolding.md` for detailed scaffolding rules, default file sets, issue form fields, PR template guidance, CODEOWNERS guidance, labels, and platform-setting caveats.
 
 ## Safe restructuring guidance
 
