@@ -1,6 +1,6 @@
 ---
 name: repository-governance
-description: Establish durable AI-native repository governance by actively scanning existing documentation, organizing agent instructions, preserving institutional memory, normalizing collaboration workflows, documenting decisions, improving safety guidance, assessing repository maturity, detecting governance drift, and strengthening supply-chain practices.
+description: Use when auditing or improving repository governance for AI coding agents: AGENTS.md, documentation topology, ADRs, validation, safety rules, trust boundaries, supply chain, release/runtime governance, and governance drift. Do not use for product-specific architecture design unless the task is about durable governance documentation.
 ---
 
 # Repository Governance
@@ -9,6 +9,25 @@ This skill establishes durable AI-native repository governance for humans and AI
 
 It should remain domain-generic. Do not copy product-specific rules, business terminology, integration details, regulatory assumptions, customer constraints, or implementation plans from one repository into another. Instead, preserve the reusable governance pattern and adapt it to the target repository's existing documentation style.
 
+## When to use this skill
+
+Use this skill when the user asks to:
+
+- audit repository governance,
+- create or improve `AGENTS.md`,
+- map documentation ownership and reading order,
+- detect governance drift between docs, code, CI, ADRs, workflows, and release/runtime behavior,
+- improve validation, definition-of-done, safety, trust-boundary, supply-chain, release, runtime, or policy-as-code documentation,
+- assess repository governance maturity.
+
+Do not use this skill when the user only wants:
+
+- a product-specific implementation plan,
+- a pure code refactor with no governance or documentation impact,
+- legal, regulatory, or certification assurance,
+- security exploitation guidance,
+- a one-off copy edit with no governance implications.
+
 ## Core governance pattern
 
 Strong repositories should usually have a root `AGENTS.md` as the primary operating contract for AI agents.
@@ -16,6 +35,8 @@ Strong repositories should usually have a root `AGENTS.md` as the primary operat
 `AGENTS.md` should point agents to the repository's durable context before they implement changes. It should define the non-negotiable instructions that must survive across sessions, tools, agents, and contributors.
 
 Use modular `docs/agent/*` files only when the repository grows beyond what one root file can safely cover. Modular files should support the root contract, not replace it.
+
+For monorepos or repositories with distinct subprojects, consider nested agent instructions when subdirectories have different build/test commands, security rules, deployment rules, or ownership. When nested instructions exist, verify that their precedence is intentional, that they do not contradict the root contract, and that shared rules are not duplicated across every subproject.
 
 ## Analysis and reasoning posture
 
@@ -35,6 +56,29 @@ Do not expose private chain-of-thought. Instead, provide concise rationale, evid
 
 When a tool or agent runtime supports configurable reasoning effort, prefer high reasoning effort for governance audits, documentation restructuring, drift detection, and maturity assessments.
 
+## Default audit output
+
+Unless the user asks for another format, produce these sections:
+
+- **Governance inventory:** path, observed role, canonical/stale/duplicate/conflicting/unknown status, evidence, recommended action.
+- **Topology assessment:** canonical entrypoints, intended reading order, missing or unclear links, ownership gaps.
+- **Prioritized findings:** P0 for unsafe or production-impacting gaps, P1 for likely agent/contributor errors, P2 for maintainability or drift risk, P3 for cleanup or clarity.
+- **Smallest safe patch plan:** files to edit, files not to move, review risks, validation steps.
+- **Open questions:** only where repository evidence is insufficient.
+
+## Finding format
+
+For each non-trivial finding, use:
+
+- **Finding:** concise statement
+- **Evidence:** file paths, commands, snippets, observed absence, or repository/platform setting inspected
+- **Type:** fact | inference | risk | recommendation | open question
+- **Severity:** P0 | P1 | P2 | P3
+- **Confidence:** high | medium | low
+- **Suggested action:** smallest safe next step
+
+Avoid unsupported certainty. If a repository setting, workflow behavior, or external service configuration cannot be observed, mark it as **unknown** rather than missing.
+
 ## Active repository scan workflow
 
 Before creating or restructuring governance documentation, actively scan the repository.
@@ -42,6 +86,7 @@ Before creating or restructuring governance documentation, actively scan the rep
 Build a governance inventory from existing files. Look for:
 
 - root `AGENTS.md`
+- nested `AGENTS.md` or `AGENTS.override.md` files
 - `README.md`
 - `TODO.md` or roadmap files
 - `CONTEXT.md` and `CONTEXT-MAP.md`
@@ -74,6 +119,21 @@ For each relevant document, classify its role:
 - archive, spike, or historical note
 - duplicate, stale, orphaned, or conflicting document
 
+## Repository settings and platform governance
+
+When tools allow access to repository or organization settings, include platform governance in the audit:
+
+- branch protection or rulesets,
+- required reviews and required status checks,
+- CODEOWNERS review enforcement,
+- deployment environments and approval gates,
+- GitHub Actions permissions and default token permissions,
+- secret scanning and push protection,
+- dependency graph, dependency review, Dependabot alerts/updates,
+- code scanning or CodeQL setup.
+
+If settings are not observable, mark them as **unknown**, not missing. Do not claim that a repository lacks a protection unless the setting was actually inspected.
+
 ## Documentation structure audit
 
 After scanning, produce a structure assessment before making large changes.
@@ -93,6 +153,20 @@ The assessment should identify:
 - places where docs should be merged, moved, renamed, archived, or cross-linked
 
 Prefer evidence-backed observations over generic templates.
+
+## Governance drift checks
+
+Compare these sources for contradictions:
+
+- `AGENTS.md` vs. README setup instructions
+- validation docs vs. package scripts, Makefile, build files, and CI workflows
+- ADRs vs. current architecture docs and code structure
+- deployment docs vs. workflow files, environment descriptors, and runtime config
+- dependency guidance vs. manifests, lockfiles, Dependabot/Renovate config, and CI
+- security guidance vs. workflows, Dockerfiles, config examples, scripts, and runbooks
+- release docs vs. tags, branches, artifact workflows, changelog, and release notes
+
+Classify drift as command drift, ownership drift, architecture drift, security drift, release drift, or trust-boundary drift.
 
 ## Safe restructuring guidance
 
@@ -124,6 +198,7 @@ Do not force every repository into the same file layout. Follow the repository's
 Useful governance information can live in places such as:
 
 - root `AGENTS.md`
+- nested `AGENTS.md` or `AGENTS.override.md`
 - `README.md`
 - `TODO.md` or roadmap files
 - `docs/adr/`
@@ -141,7 +216,7 @@ Prefer clear ownership and discoverability over a large number of small files.
 High-quality repositories increasingly use:
 
 - root `AGENTS.md` as an AI-agent operating contract
-- modular `docs/agent/*` systems where needed
+- modular or nested agent instructions where needed
 - durable repository memory
 - lightweight decision logs or ADRs
 - anti-pattern documentation
@@ -225,6 +300,19 @@ When such a boundary becomes part of the repository workflow or runtime, documen
 - what risks or assumptions exist
 
 During the active scan, identify undocumented trust boundaries from manifests, workflows, deployment files, scripts, config examples, and docs.
+
+## Compliance boundary
+
+Do not claim that a repository is compliant with a law, regulation, standard, certification, or customer requirement unless the repository contains explicit evidence and the user asked for that assessment.
+
+Use governance language such as:
+
+- "missing documented control"
+- "requires human compliance review"
+- "evidence not found"
+- "not observable from repository files"
+
+Do not invent regulatory obligations for a domain.
 
 ## Valuable governance docs
 
@@ -383,34 +471,19 @@ Operational repositories should eventually document:
 - credential rotation procedures
 - communication expectations
 
-## Governance maturity progression
+## Governance maturity assessment
 
-Typical maturity progression:
+Assign the lowest maturity level whose criteria are substantially met:
 
-1. bootstrap
-2. structured
-3. operational
-4. hardened
-5. enterprise-ready
+1. **Bootstrap:** README and basic validation commands are discoverable.
+2. **Structured:** root `AGENTS.md` or equivalent exists; docs have clear ownership and reading order.
+3. **Operational:** validation, ADR, security, trust-boundary, and definition-of-done guidance are usable in PR work.
+4. **Hardened:** CODEOWNERS, dependency governance, SBOM/provenance direction, workflow restrictions, and drift checks exist.
+5. **Enterprise-ready:** governance is partly automated, policy-as-code direction is clear, incident/release/runtime governance is documented, and metrics are reviewable.
 
-Indicators of maturity include:
+Always include:
 
-- root `AGENTS.md` or equivalent agent operating contract
-- explicit security invariants
-- AI-agent safety rules
-- active documentation inventory and structure audit
-- dependency governance
-- CODEOWNERS
-- SBOM generation
-- validation automation
-- governance drift awareness
-- supply-chain documentation
-- durable memory and decision tracking
-- runtime governance
-- release governance
-- architecture fitness guidance
-- policy-as-code direction
-- provenance planning
-- operational incident readiness
-- governance automation
-- governance metrics
+- assigned level
+- evidence
+- missing criteria for the next level
+- smallest safe next improvement
