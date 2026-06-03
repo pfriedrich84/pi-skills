@@ -15,7 +15,7 @@ Personal Pi package containing the skills, extensions, and non-secret configurat
 pi install https://github.com/pfriedrich84/pi-skills.git
 ```
 
-The package manifest exposes `skills/` and `extensions/` to Pi.
+The package manifest exposes `skills/` and `extensions` to Pi.
 
 ## Restore config manually
 
@@ -35,12 +35,13 @@ cp config/pi-config.json ~/.pi/config.json
 
 ## Included skills
 
-- `clawpatch`
-- `grill-me`
-- `graphifyy`
-- `grill-with-docs`
+- `repository-governance` — activate, audit, and scaffold repository governance so humans and agents can find `AGENTS.md`, canonical docs, ADRs, validation steps, issue/PR templates, CODEOWNERS, trust boundaries, release/runtime guidance, and remaining platform-setting gaps.
 - `improve-codebase-architecture`
 - `tune-repo`
+- `clawpatch`
+- `grill-me`
+- `grill-with-docs`
+- `graphifyy`
 
 ## Included extensions
 
