@@ -16,6 +16,7 @@ This skill may inspect, propose, or create governance scaffolding such as:
 - `.github/ISSUE_TEMPLATE/documentation_drift.yml`
 - `.github/pull_request_template.md`
 - `.github/CODEOWNERS`
+- `.github/dependabot.yml`
 - `CONTRIBUTING.md`
 - `SECURITY.md`
 - `SUPPORT.md`
@@ -213,6 +214,10 @@ Good candidates for ownership rules:
 - dependency manifests and lockfiles.
 
 CODEOWNERS only becomes enforceable when repository platform settings require code-owner review. If that setting cannot be inspected, mark enforcement as **unknown** and recommend verification.
+
+## Dependabot configuration
+
+Create or propose `.github/dependabot.yml` when dependency manifests are present and no dependency-update bot configuration exists. Include only ecosystems that are actually present in the repository, use a conservative schedule, group related updates when appropriate, and keep PR limits low enough for maintainers to review. Document that Dependabot update configuration is separate from platform settings such as Dependabot alerts, security updates, dependency graph, and dependency review; mark those settings as **unknown** when they cannot be inspected.
 
 ## Community-health files
 

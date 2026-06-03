@@ -15,6 +15,7 @@ When tools allow access to repository or organization settings, include platform
 - GitHub Actions permissions and default token permissions,
 - secret scanning and push protection,
 - dependency graph, dependency review, Dependabot alerts/updates,
+- Dependabot update configuration in `.github/dependabot.yml` or Renovate configuration when dependency manifests are present,
 - code scanning or CodeQL setup.
 
 If settings are not observable, mark them as **unknown**, not missing. Do not claim that a repository lacks a protection unless the setting was actually inspected.
@@ -62,6 +63,10 @@ During repository scans, inspect:
 - SBOM/provenance/signing documentation,
 - license or dependency-review configuration,
 - Dependabot or Renovate configuration.
+
+When the repository has supported dependency manifests and no existing dependency-update bot configuration, propose or create the smallest useful `.github/dependabot.yml` (or Renovate equivalent) for the observed ecosystems. Keep update schedules conservative, group related updates where it reduces PR noise, and document that bot PRs still require human review for runtime, CI, Docker, security-sensitive, or trust-boundary changes.
+
+For GitHub repositories, distinguish file-based Dependabot update configuration from platform-only settings such as dependency graph, Dependabot alerts, Dependabot security updates, dependency review, and secret scanning. If those settings cannot be inspected or changed through available tools, mark them as **unknown** and recommend human verification rather than implying the config file enables alerts.
 
 Classify supply-chain findings as:
 
