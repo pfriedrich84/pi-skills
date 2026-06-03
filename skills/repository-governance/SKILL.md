@@ -1,6 +1,7 @@
 ---
 name: repository-governance
-description: Use when auditing or improving repository governance for AI coding agents: AGENTS.md, documentation topology, ADRs, validation, safety rules, trust boundaries, supply chain, issue/PR scaffolding, release/runtime governance, and governance drift. Do not use for product-specific architecture design unless the task is about durable governance documentation.
+description: >-
+  Use when activating, auditing, or improving repository governance for AI coding agents: AGENTS.md, documentation topology, ADRs, validation, safety rules, trust boundaries, supply chain, issue/PR scaffolding, release/runtime governance, and governance drift. Do not use for product-specific architecture design unless the task is about durable governance documentation.
 ---
 
 # Repository Governance
@@ -13,6 +14,7 @@ It should remain domain-generic. Do not copy product-specific rules, business te
 
 Load these references when the task needs more detail than this skill file should carry:
 
+- `references/activation-playbook.md` — end-to-end repository governance activation workflow so humans and agents can find canonical instructions, docs, validation, review boundaries, and remaining platform-setting gaps.
 - `references/audit-workflow.md` — detailed repository scan, topology review, drift checks, safe restructuring, and nested agent-instruction guidance.
 - `references/output-templates.md` — audit output, finding, inventory, patch-plan, and evidence templates.
 - `references/governance-scaffolding.md` — issue forms, PR templates, CODEOWNERS, community-health files, labels, and lightweight GitHub governance scaffolding.
@@ -23,6 +25,7 @@ Load these references when the task needs more detail than this skill file shoul
 
 Use this skill when the user asks to:
 
+- activate repository governance so humans and agents can find the right starting points, canonical docs, validation steps, and review boundaries,
 - audit repository governance,
 - create or improve `AGENTS.md`,
 - map documentation ownership and reading order,
@@ -38,6 +41,28 @@ Do not use this skill when the user only wants:
 - legal, regulatory, or certification assurance,
 - security exploitation guidance,
 - a one-off copy edit with no governance implications.
+
+## Repository activation outcome
+
+When activating this governance skill in a target repository, the expected outcome is:
+
+- a clear root `AGENTS.md` or equivalent agent operating contract,
+- a documented reading order for humans and agents,
+- linked canonical docs for ADRs, validation, security, trust boundaries, release/runtime, and governance scaffolding,
+- optional lightweight `.github/` scaffolding where useful,
+- clear distinction between repository-file controls and platform settings,
+- a smallest-safe-next-step plan for remaining governance gaps.
+
+Agents should be able to answer:
+
+1. Where do I start?
+2. Which docs are canonical?
+3. What must I not change without approval?
+4. How do I validate changes?
+5. What needs human review?
+6. Which platform settings are required but not observable from files?
+
+Use `references/activation-playbook.md` for the end-to-end activation workflow and activation report template.
 
 ## Core governance pattern
 
