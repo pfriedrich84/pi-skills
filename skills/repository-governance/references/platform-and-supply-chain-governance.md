@@ -62,9 +62,12 @@ During repository scans, inspect:
 - generated artifacts,
 - SBOM/provenance/signing documentation,
 - license or dependency-review configuration,
+- dependency-age quarantine checks and allowlist files such as `.dependency-age-allowlist`,
 - Dependabot or Renovate configuration.
 
 When the repository has supported dependency manifests and no existing dependency-update bot configuration, propose or create the smallest useful `.github/dependabot.yml` (or Renovate equivalent) for the observed ecosystems. Keep update schedules conservative, group related updates where it reduces PR noise, and document that bot PRs still require human review for runtime, CI, Docker, security-sensitive, or trust-boundary changes.
+
+If the repository has dependency-age quarantine controls, preserve them when handling bot PRs. Do not bypass age gates by default. If the repository uses an allowlist file such as `.dependency-age-allowlist`, only add entries for explicit security fixes or maintainer-approved exceptions, include the CVE or justification and expiry/removal condition, and remove exceptions once the package version ages past the quarantine window.
 
 For GitHub repositories, distinguish file-based Dependabot update configuration from platform-only settings such as dependency graph, Dependabot alerts, Dependabot security updates, dependency review, and secret scanning. If those settings cannot be inspected or changed through available tools, mark them as **unknown** and recommend human verification rather than implying the config file enables alerts.
 

@@ -243,7 +243,7 @@ Repositories should document non-negotiable agent constraints, including:
 - no secret exposure,
 - no credential, token, key, certificate, or customer data commits,
 - no CI/workflow changes without review and clear scope,
-- no dependency additions without necessity and review,
+- no dependency additions or fresh dependency releases without necessity, age/quarantine checks, and review,
 - no approval, authorization, release, safety, or compliance bypasses for convenience,
 - no production-impacting changes without validation and review,
 - no broad network calls, telemetry, or outbound callbacks without a documented reason,
