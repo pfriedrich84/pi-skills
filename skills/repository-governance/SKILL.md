@@ -286,7 +286,15 @@ Document:
 - how to validate security-sensitive or workflow-sensitive changes,
 - when human approval is required.
 
-A useful definition of done should include code, tests, docs, security implications, migration notes, and operational impact where relevant.
+For regression prevention, prefer a layered gate:
+
+1. one documented local CI-parity command that wraps the common checks,
+2. an optional installable pre-push hook that calls that command or a changed-path subset,
+3. PR templates that ask for the local or targeted checks run,
+4. branch protection or rulesets requiring CI before merge,
+5. release documentation that identifies the trusted branches and required checks.
+
+A useful definition of done should include code, tests, docs, security implications, migration notes, operational impact, and whether required local or CI gates passed where relevant.
 
 During the active scan, derive validation expectations from scripts, package manifests, CI workflows, Makefiles, build files, and existing docs. If the derived expectations are incomplete or contradictory, surface that as a governance gap.
 
